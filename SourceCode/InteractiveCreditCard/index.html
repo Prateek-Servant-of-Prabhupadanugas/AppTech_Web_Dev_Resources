@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEO-TOKYO PAY: AUTH INTERFACE</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- 3D CARD PREVIEW BLOCK -->
+    <div class="card-space">
+      <div class="credit-card" id="card">
+        <!-- FRONT ASPECT -->
+        <div class="card-face front">
+          <div class="card-glow"></div>
+          <div class="card-header">
+            <span class="brand-logo">🌌 NEO-PAY</span>
+            <div class="chip"></div>
+          </div>
+          <div class="card-number" id="view-number">•••• •••• •••• ••••</div>
+          <div class="card-footer">
+            <div class="field-wrap">
+              <span class="label">CARD HOLDER</span>
+              <span class="val" id="view-name">CHIP CITIZEN</span>
+            </div>
+            <div class="field-wrap">
+              <span class="label">EXPIRES</span>
+              <span class="val" id="view-expiry">MM/YY</span>
+            </div>
+          </div>
+        </div>
+        <!-- BACK ASPECT -->
+        <div class="card-face back">
+          <div class="magnetic-strip"></div>
+          <div class="signature-bar">
+            <span class="label">SECURE NODE</span>
+            <div class="cvv-display" id="view-cvv">•••</div>
+          </div>
+          <div class="back-logo">SYSTEM SECURE // 2026</div>
+        </div>
+      </div>
+    </div>
+
