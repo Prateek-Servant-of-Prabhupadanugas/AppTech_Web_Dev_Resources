@@ -25,10 +25,10 @@ Each module is structurally split into:
 ### 📦 Mini-Projects (Concept-by-Concept)
 1. **Interactive Cyberpunk Credit Card Form**
    * *Focus:* Advanced form validation, real-time data binding, and a 3D glassmorphism card preview that flips and populates dynamically.
-   * [💻 Source Code](#) | [🌐 Live Demo](#)
+   * [💻 Source Code](#) | [🌐 Live Demo](https://codepen.io/PrateekAwesome/pen/MYybENd)
 2. **3D Parallax Product Showcase Matrix**
    * *Focus:* CSS Grid layout orchestration, dynamic aspect ratios, and smooth multi-layered hover interaction effects.
-   * [💻 Source Code](#) | [🌐 Live Demo](#)
+   * [💻 Source Code](#) | [🌐 Live Demo](https://codepen.io/PrateekAwesome/pen/OPWQbWG)
 
 ### 🏆 Phase Capstone
 * **The Dynamic Engineering Portfolio**
