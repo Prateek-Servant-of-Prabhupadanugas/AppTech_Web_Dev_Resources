@@ -1,4 +1,4 @@
-jsj
+
 # 🚀 Advanced Web Development & AI Engineering Curriculum
 
 Welcome to the ultimate, industry-mapped Full-Stack Web Development curriculum. This repository serves as a systematic roadmap designed to take students from absolute web fundamentals to deploying production-grade, AI-integrated applications.
