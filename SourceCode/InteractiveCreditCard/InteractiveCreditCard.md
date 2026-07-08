@@ -4,6 +4,15 @@ This documentation provides an engineering teardown of the high-fidelity, respon
 
 ---
 
+### 🏆 Phase 1 Capstone: Cyberpunk Credit Card Engine
+* **Description:** A highly responsive, 3D-element checkout system featuring real-time input sanitization, event-driven state syncing, and fluid backdrop glassmorphism layers.
+* **⚙️ Core Tech:** HTML5 Form APIs, CSS 3D Matrices, Javascript RegEx Validation engines.
+
+👉 [💻 View Source Code](https://github.com/Prateek-Servant-of-Prabhupadanugas/AppTech_Web_Dev_Resources/tree/main/SourceCode/InteractiveCreditCard)  
+👉 [🌐 Launch Live Interactive Demo](https://codepen.io/PrateekAwesome/pen/MYybENd)
+
+---
+
 ## 🛠️ Implemented Features Matrix
 
 * **Bi-Directional 3D Matrix Flipping:** Utilizing CSS 3D perspectives to execute low-latency card rotation when focusing on security parameters (CVV fields).
