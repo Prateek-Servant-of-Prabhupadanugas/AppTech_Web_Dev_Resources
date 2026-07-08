@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engineering Core // Project Hub</title>
+  <style>
+    :root {
+      --bg-void: #030712;
+      --neon-blue: #00f3ff;
+      --neon-pink: #ff0055;
+      --text-glow: #f8fafc;
+      --glass-panel: rgba(15, 23, 42, 0.45);
+      --border-glow: rgba(0, 243, 255, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 30%, #0f172a 0%, var(--bg-void) 80%);
+      color: var(--text-glow);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 50px 20px;
+      overflow-x: hidden;
+    }
+
+    /* --- PORTFOLIO HEADER METRICS --- */
+    .hud-header {
+      text-align: center;
+      margin-bottom: 60px;
+      max-width: 700px;
+      width: 100%;
+    }
+
+    .hud-header h1 {
+      font-size: 2rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .hud-header h1 span {
+      color: var(--neon-blue);
+      text-shadow: 0 0 10px var(--neon-blue);
+    }
+
+    .hud-header p {
+      color: #64748b;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    /* --- THE GRID CONSOLE --- */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      width: 100%;
+      max-width: 1200px;
+      perspective: 1000px; /* Globally enables 3D depth field mapping */
+    }
+
+    /* --- THE INTERACTIVE PORTFOLIO NODE --- */
+    .hub-node {
+      position: relative;
+      background: var(--glass-panel);
+      border: 1px solid var(--border-glow);
+      border-radius: 16px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      padding: 24px;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transform-style: preserve-3d;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+    }
+
+    .hub-node:hover {
+      border-color: rgba(0, 243, 255, 0.4);
+      box-shadow: 0 0 30px rgba(0, 243, 255, 0.15);
+    }
+
+    /* Static Scanner Line Decorative Background Layer */
+    .hub-node::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+      animation: scanLines 4s linear infinite;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    /* --- RIGID NON-OVERLAPPING UPPER SEGMENT --- */
+    .node-meta {
+      transform: translateZ(40px); /* Projects header elements into 3D view */
+      pointer-events: none;
+      margin-bottom: 20px;
+    }
+
+    .node-tag-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .index-badge {
+      font-size: 0.75rem;
+      color: var(--neon-pink);
+      text-shadow: 0 0 6px var(--neon-pink);
+      font-weight: bold;
+    }
+
+    .status-pill {
+      background: rgba(0, 243, 255, 0.08);
+      color: var(--neon-blue);
+      border: 1px solid rgba(0, 243, 255, 0.2);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.65rem;
+      letter-spacing: 1px;
+    }
+
+    .node-meta h2 {
+      font-size: 1.3rem;
+      color: #fff;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .node-meta p {
+      color: #94a3b8;
+      font-size: 0.8rem;
+      line-height: 1.6;
+    }
+
+    /* --- RIGID NON-OVERLAPPING LOWER SEGMENT --- */
+    .node-action-panel {
+      transform: translateZ(60px); /* Projects interaction controls to extreme front layer */
+      margin-top: auto;
+    }
+
+    .tech-stack-label {
+      font-size: 0.65rem;
+      color: #475569;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    .tech-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .tech-item {
+      background: #090d16;
+      border: 1px solid #1e293b;
+      color: #cbd5e1;
+      font-size: 0.65rem;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .link-matrix {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .hub-btn {
+      padding: 12px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 6px;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-src {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #334155;
+    }
+
+    .btn-src:hover {
+      border-color: #f8fafc;
+      color: #f8fafc;
+    }
+
+    .btn-live {
+      background: transparent;
+      color: var(--neon-blue);
+      border: 1px solid var(--neon-blue);
+      box-shadow: 0 0 10px rgba(0, 243, 255, 0.05);
+    }
+
+    .btn-live:hover {
+      background: var(--neon-blue);
+      color: var(--bg-void);
+      box-shadow: 0 0 20px var(--neon-blue);
+    }
+
+    /* --- CORE KEYFRAME SYSTEM --- */
+    @keyframes scanLines {
+      0% { top: -10%; }
+      100% { top: 110%; }
+    }
+
+    /* --- RESPONSIVE STRUCTURAL OVERRIDES --- */
+    @media (max-width: 480px) {
+      body { padding: 30px 15px; }
+      .hud-header h1 { font-size: 1.5rem; }
+      .portfolio-grid { gap: 25px; }
+      .hub-node { min-height: 440px; padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hud-header">
+    <h1>ENGINEERING CORE <span>// PORTFOLIO HUD</span></h1>
+    <p>Live technical deployment index. Tilt matrix cards horizontally to test depth calculations.</p>
+  </header>
+
+  <main class="portfolio-grid">
+
+    <section class="hub-node">
+      <div class="node-meta">
+        <div class="node-tag-row">
+          <span class="index-badge">[SYS_NODE_01]</span>
+          <span class="status-pill">ONLINE</span>
+        </div>
+        <h2>Cyberpunk Card Engine</h2>
+        <p>A high-fidelity payment portal interface leveraging CSS 3D perspectives to flip the card on security field capture, with embedded regex input firewalls.</p>
+      </div>
+      <div class="node-action-panel">
+        <div class="tech-stack-label">MODULE LOGS:</div>
+        <div class="tech-row">
+          <span class="tech-item">HTML5</span>
+          <span class="tech-item">3D-Matrix</span>
+          <span class="tech-item">RegEx</span>
+        </div>
+        <div class="link-matrix">
+          <a href="#" class="hub-btn btn-src">SOURCE</a>
+          <a href="#" class="hub-btn btn-live">LIVE DEMO</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="hub-node">
+      <div class="node-meta">
+        <div class="node-tag-row">
+          <span class="index-badge">[SYS_NODE_02]</span>
+          <span class="status-pill">ONLINE</span>
+        </div>
+        <h2>3D Parallax Showcase</h2>
+        <p>An advanced product display grid mapping mouse coordinates dynamically against container centerlines to execute smooth non-linear tilt animations.</p>
+      </div>
+      <div class="node-action-panel">
+        <div class="tech-stack-label">MODULE LOGS:</div>
+        <div class="tech-row">
+          <span class="tech-item">CSS-Grid</span>
+          <span class="tech-item">Translate-Z</span>
+          <span class="tech-item">Mouse-Loops</span>
+        </div>
+        <div class="link-matrix">
+          <a href="#" class="hub-btn btn-src">SOURCE</a>
+          <a href="#" class="hub-btn btn-live">LIVE DEMO</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="hub-node">
+      <div class="node-meta">
+        <div class="node-tag-row">
+          <span class="index-badge">[SYS_NODE_03]</span>
+          <span class="status-pill">STAGING</span>
+        </div>
+        <h2>Vanilla Workspace Hub</h2>
+        <p>The master structural portfolio container hosting all upcoming production modules, responsive milestones, and interview technical components.</p>
+      </div>
+      <div class="node-action-panel">
+        <div class="tech-stack-label">MODULE LOGS:</div>
+        <div class="tech-row">
+          <span class="tech-item">BEM-Flow</span>
+          <span class="tech-item">Flexbox-Grid</span>
+          <span class="tech-item">GPU-Cache</span>
+        </div>
+        <div class="link-matrix">
+          <a href="#" class="hub-btn btn-src">SOURCE</a>
+          <a href="#" class="hub-btn btn-live">LIVE DEMO</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const hubNodes = document.querySelectorAll('.hub-node');
+
+    // Attach interaction listeners to every core component instance
+    hubNodes.forEach(node => {
+      node.addEventListener('mousemove', e => {
+        const dimensions = node.getBoundingClientRect();
+        
+        // Isolate localized coordinate matrix offsets
+        const cursorX = e.clientX - dimensions.left;
+        const cursorY = e.clientY - dimensions.top;
+        
+        // Find center anchor metrics
+        const axisX = dimensions.width / 2;
+        const axisY = dimensions.height / 2;
+        
+        // Calculate smooth ratio deviations (Max tilt restricted safely to 10 degrees)
+        const computeY = ((cursorX - axisX) / axisX) * 10;
+        const computeX = ((cursorY - axisY) / axisY) * -10;
+        
+        node.style.transform = `rotateX(${computeX}deg) rotateY(${computeY}deg) scale3d(1.01, 1.01, 1.01)`;
+      });
+
+      // Animate card smoothly back to rest state when focus is lost
+      node.addEventListener('mouseleave', () => {
+        node.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, box-shadow 0.3s';
+        node.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      });
+
+      // Erase transition engine delay during live tracking to maximize refresh performance
+      node.addEventListener('mouseenter', () => {
+        node.style.transition = 'border-color 0.3s, box-shadow 0.3s';
+      });
+    });
+  </script>
+</body>
+  </html>
