@@ -9,7 +9,9 @@ This document outlines the architecture, distribution, and repository mapping of
 To ensure consistency and high educational value, every cheat sheet in this repository is strictly organized into four specialized sections:
 
 ────────────────────────────────────────────────────────┐
+
 │               THE CHEAT SHEET FRAMEWORK                │
+
 ├────────────────────────────────────────────────────────┤
 
 │ 🕐 1. THE 5-MINUTE REFRESHER                           │
